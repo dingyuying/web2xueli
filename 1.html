@@ -16,7 +16,6 @@
                 <marquee>[温馨提示]最近有不少不法分子在网上骗人，请大家注意!!!</marquee>
             </div>
         </div>
-
     </div>
     <div class="box" id="box">
         <div class="slider" id="slider">
@@ -28,9 +27,8 @@
             <div class="slide"><img src="images/b5.png" alt=""></div>
             <div class="slide"><img src="images/b1.png" alt=""></div>
         </div>
-        <span id="left" onclick="perv()">
-            < </span> <span id="right" onclick="next()"> >
-        </span>
+        <span id="left" onclick="perv()">< </span> 
+        <span id="right" onclick="next()"> > </span>
         <ul class="nav" id="nav">
             <li class="active">1</li>
             <li>2</li>
@@ -43,7 +41,6 @@
         var box = document.getElementById("box");
         var oNavlist = document.getElementById("nav").children;
         var slider = document.getElementById("slider");
-        var littlebox = document.getElementById("littlebox");
         var left = document.getElementById("left");
         var right = document.getElementById("right");
         var index = 1;
@@ -55,7 +52,6 @@
             animate(right, { opacity: 50 });
             clearInterval(timer)
         }
-        /*鼠标划开开定时器*/
         box.onmouseout = function () {
             animate(left, { opacity: 0 })
             animate(right, { opacity: 0 })
@@ -63,20 +59,6 @@
         }
         right.onclick = next;
         left.onclick = perv;
-        //轮播下一张的函数
-        function navmove() {
-            for (var i = 0; i < oNavlist.length; i++) {
-                oNavlist[i].className = "";
-            }
-            if (index > 5) {
-                oNavlist[0].className = "active";
-            } else if (index <= 0) {
-                oNavlist[4].className = "active";
-            } else {
-                oNavlist[index - 1].className = "active";
-            }
-        }
-        timer = setInterval(next(), 3000);
         for (var i = 0; i < oNavlist.length; i++) {
             oNavlist[i].index = i;
             oNavlist[i].onclick = function () {
@@ -85,6 +67,9 @@
                 animate(slider, { left: -1200 * index });
             }
         }
+
+
+
         function next() {
             if (isMoving) {
                 return;
@@ -115,13 +100,20 @@
                 isMoving = false;
             });
         }
-        function contin() {
-            animate(littlebox, { left: -654 });
+        //轮播下一张的函数
+        function navmove() {
+            for (var i = 0; i < oNavlist.length; i++) {
+                oNavlist[i].className = "";
+            }
+            if (index > 5) {
+                oNavlist[0].className = "active";
+            } else if (index <= 0) {
+                oNavlist[4].className = "active";
+            } else {
+                oNavlist[index - 1].className = "active";
+            }
         }
-        toptimer = setInterval(contin(), 30);
-
-
-
+        timer = setInterval(next, 3000);
     </script>
 
 </body>
